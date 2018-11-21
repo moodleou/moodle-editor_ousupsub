@@ -17,7 +17,7 @@
 /**
  * OU sup-sub editor upgrade script.
  *
- * @package    editor_ousubsub
+ * @package    editor_ousupsub
  * @copyright  2018 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
