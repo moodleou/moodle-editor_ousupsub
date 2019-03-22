@@ -24,7 +24,15 @@ body.edge .editor_ousupsub {
     overflow-x: auto;
 }
 .editor_ousupsub_content {
-    padding: 2px;
+    padding: 1px 2px 3px 2px;
+}
+
+body.gecko .editor_ousupsub_content {
+    padding: 0 2px 3px 2px;
+}
+
+body.edge .editor_ousupsub_content {
+    padding: 0 2px 2px;
 }
 
 div.editor_ousupsub_toolbar {
