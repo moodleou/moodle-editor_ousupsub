@@ -1,18 +1,16 @@
 .editor_ousupsub {
     display: inline-block;
-    vertical-align: -14px;
-}
-body.safari .editor_ousupsub {
-    vertical-align: 0;
-}
-body.ie .editor_ousupsub {
-    vertical-align: 26px;
+    vertical-align: bottom;
 }
 /* Moodle does not add an 'edge' classname to body yet, and when they do
    (MDL-50807) the class name used may not be 'edge', but in any case, this is
    the right offset. */
 body.edge .editor_ousupsub {
     vertical-align: 25px;
+}
+
+.editor_ousupsub_content {
+    outline: none; /* Remove outer border of Chrome. */
 }
 
 .editor_ousupsub_content_wrap {
@@ -22,17 +20,6 @@ body.edge .editor_ousupsub {
     color: #000;
     white-space: nowrap;
     overflow-x: auto;
-}
-.editor_ousupsub_content {
-    padding: 1px 2px 3px 2px;
-}
-
-body.gecko .editor_ousupsub_content {
-    padding: 0 2px 3px 2px;
-}
-
-body.edge .editor_ousupsub_content {
-    padding: 0 2px 2px;
 }
 
 div.editor_ousupsub_toolbar {

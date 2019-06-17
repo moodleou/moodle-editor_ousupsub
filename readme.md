@@ -45,6 +45,17 @@ and keeping the results HTML as clean as possible.
 * Provide a standalone version of the same editor for offline situations such as e-readers
 * Editor can placed where required including inline with text
 
+## Alignment
+
+If the editor is used inline, for example in a paragraph of text, then the text inside the text area should be baseline-aligned with the surrounding content.
+However, this only works if the surrounding text is styled not to extremely. We only support the alignment working if you are using with several of our question types:
+
+* https://moodle.org/plugins/qtype_pmatch
+* https://moodle.org/plugins/qtype_varnumeric
+* https://moodle.org/plugins/qtype_varnumericset
+* https://moodle.org/plugins/qtype_varnumunit
+* https://moodle.org/plugins/qtype_combined (Only work if the surrounding text is styled not to extremely)
+
 ## Standalone version
 
 More details are in readme_standalone.txt that gets added to the /standalone folder

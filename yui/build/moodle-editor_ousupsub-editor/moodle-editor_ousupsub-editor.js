@@ -233,28 +233,7 @@ Y.extend(Editor, Y.Base, {
         // Add everything to the wrapper.
         this.setupToolbar();
 
-        // Editable content wrapper.
-        var content = Y.Node.create('<div class="' + CSS.CONTENTWRAPPER + '"></div>');
-        content.appendChild(this.editor);
-        this._wrapper.appendChild(content);
-
-        // Set the visible width and height.
-        var width = (this.textarea.getAttribute('cols') * 6 + 41) + 'px';
-        this.editor.setStyle('width', width);
-        this.editor.setStyle('minWidth', width);
-        this.editor.setStyle('maxWidth', width);
-
-        var rows = this.textarea.getAttribute('rows');
-        var height = (rows * 6 + 13) + 'px';
-        this.editor.setStyle('height', height);
-        this.editor.setStyle('minHeight', height);
-        this.editor.setStyle('maxHeight', height);
-
-        // IE needs the editor wrapper height to be set too. It include 4px of padding.
-        height = (rows * 6 + 17) + 'px';
-        content.setStyle('height', height);
-        content.setStyle('minHeight', height);
-        content.setStyle('maxHeight', height);
+        this.setupTemplateEditor();
 
         // Disable odd inline CSS styles.
         this.disableCssStyling();
@@ -737,6 +716,67 @@ Y.extend(Editor, Y.Base, {
                 }
             }
         }
+    },
+
+    /**
+     * Setup Template for Editor.
+     * Because of the limitation of css when make align question text and answer text on same baseline in differences qtypes,
+     * also themes. Example font-size, line-height difference each other is very small: 0.1px.
+     * So we need to use this function to get the computed style to apply to both question text and answer text,
+     * to make sure they have the same baseline.
+     *
+     *
+     * @method setupTemplateEditor
+     */
+    setupTemplateEditor: function() {
+        var content = Y.Node.create('<div class="' + CSS.CONTENTWRAPPER + '"></div>');
+        content.appendChild(this.editor);
+        this._wrapper.appendChild(content);
+        // Set the visible width and height.
+        var width = (this.textarea.getAttribute('cols') * 6 + 41) + 'px';
+        this.editor.setStyle('width', width);
+        this.editor.setStyle('minWidth', width);
+        this.editor.setStyle('maxWidth', width);
+        var rows = this.textarea.getAttribute('rows');
+        var height = (rows * 6 + 13);
+        var heightEditor = height + 'px';
+        this.editor.setStyle('height', heightEditor);
+        this.editor.setStyle('minHeight', heightEditor);
+        this.editor.setStyle('maxHeight', heightEditor);
+        this.editor.setStyle('line-height', heightEditor);
+        // IE needs the editor wrapper height to be set too. It include 4px of padding.
+        var heightContent = (height + 1) + 'px';
+        content.setStyle('height', heightContent);
+        content.setStyle('minHeight', heightContent);
+        content.setStyle('maxHeight', heightContent);
+        // Align the textarea label with the content editor.
+        this.textareaLabel.setStyle('display', 'inline-block');
+        this.textareaLabel.setStyle('margin', 0);
+        this.textareaLabel.setStyle('height', heightContent);
+        this.textareaLabel.setStyle('minHeight', heightContent);
+        this.textareaLabel.setStyle('maxheight', heightContent);
+        // Align for the case using Supsub on the editor.
+        if (this.textareaLabel.hasClass('accesshide')) {
+            this.textareaLabel.removeClass('accesshide');
+            this.textareaLabel.setStyle('visibility', 'hidden');
+            this._wrapper.setStyle('margin-left', -parseInt(this.textareaLabel.get('offsetWidth')));
+        } else {
+            this.textareaLabel.setStyle('vertical-align', 'bottom');
+        }
+        // Update the height of the editor and label for correct align after document ready.
+        var self = this;
+        var selectorEditor = '#' + self.get('elementid').replace(/:/g, "\\:") + 'editable';
+        Y.on('contentready', function() {
+            self.textareaLabel.setStyle('line-height', self.editor.getComputedStyle('line-height'));
+            var heightWrapper = height + 1 + parseInt(self.toolbar.get('offsetHeight'));
+            self._wrapper.setStyle('height', heightWrapper);
+            self._wrapper.setStyle('minHeight', heightWrapper);
+            self._wrapper.setStyle('maxHeight', heightWrapper);
+            if (Y.UA.ie && self.textareaLabel.getComputedStyle('visibility') === 'hidden') {
+                // IE have problem with vertical-align: bottom. We need to calculate the exact pixel for it.
+                self._wrapper.setStyle('vertical-align', parseInt(self.toolbar.get('offsetHeight')) - 1 + 'px');
+            }
+        }, selectorEditor);
     },
 
     /**
