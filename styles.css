@@ -28,6 +28,7 @@ div.editor_ousupsub_toolbar {
     border: 1px solid #bbb;
     height: 25px;
     line-height: 0;
+    box-sizing: content-box;
 }
 
 div.editor_ousupsub_toolbar div.ousupsub_group {
