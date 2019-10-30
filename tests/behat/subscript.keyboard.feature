@@ -7,7 +7,7 @@ Feature: Subscript keyboard interface
   Scenario: Apply Subscript some text using the keyboard interface
     Given I log in as "admin"
     And I am on the integrated "sub" editor test page
-    Then ".[contains(@title, 'Shift + _ or Down arrow')]" "xpath_element" should exist in the "button.ousupsub_subscript_button_subscript" "css_element"
+    Then "ancestor-or-self::button[contains(@title, 'Shift + _ or Down arrow')]" "xpath_element" should exist in the "button.ousupsub_subscript_button_subscript" "css_element"
 
     # Verify subscript key _ applies subscript
     When I set the field "Input" to "Helicopter"

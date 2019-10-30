@@ -7,7 +7,7 @@ Feature: ousupsub superscript keyboard interface
   Scenario: Superscript some text using the keyboard interface
     Given I log in as "admin"
     And I am on the integrated "sup" editor test page
-    Then ".[contains(@title, 'Shift + ^ or Up arrow')]" "xpath_element" should exist in the "button.ousupsub_superscript_button_superscript" "css_element"
+    Then "ancestor-or-self::button[contains(@title, 'Shift + ^ or Up arrow')]" "xpath_element" should exist in the "button.ousupsub_superscript_button_superscript" "css_element"
 
     # Verify superscript key ^ applies superscript
     When I set the field "Input" to "Helicopter"
