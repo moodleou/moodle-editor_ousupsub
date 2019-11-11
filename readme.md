@@ -5,9 +5,6 @@ with superscripts and subscripts, for use in Moodle.
 
 ## Installation
 
-This plugin should be compatible with Moodle 3.4+. Older versions are
-available if you need to support older versions of Moodle.
-
 Install from the Moodle plugins database https://moodle.org/plugins/editor_ousupsub.
 
 Or you can install using git. Type this commands in the root of your Moodle install

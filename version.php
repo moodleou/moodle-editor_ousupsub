@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018052300;
-$plugin->requires  = 2017111300;
+$plugin->version   = 2018111100;
+$plugin->requires  = 2018051700;
 $plugin->component = 'editor_ousupsub';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0 for Moodle 3.4+';
+$plugin->release   = '1.1 for Moodle 3.5+';
 
 $plugin->outestssufficient = true;
