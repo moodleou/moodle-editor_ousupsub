@@ -1,4 +1,4 @@
-# The OU Superscript/subscript editor [![Build Status](https://travis-ci.com/moodleou/moodle-editor_ousupsub.svg?branch=master)](https://travis-ci.com/moodleou/moodle-editor_ousupsub)
+# The OU Superscript/subscript editor
 
 This is a simple text input widget that lets users edit one line of input
 with superscripts and subscripts, for use in Moodle.
