@@ -7,7 +7,7 @@ Feature: ousupsub superscript undo and redo
     Given I log in as "admin"
     And I am on the integrated "both" editor test page
     # Set the initial text
-    And I enter the text "Helicopter" in the "Input" ousupsub editor
+    And I set the field "Input" to "Helicopter"
     Then I should see "Helicopter" in the "Input" ousupsub editor
     And I select the text in the "Input" ousupsub editor
 
