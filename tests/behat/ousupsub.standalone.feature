@@ -22,27 +22,27 @@ Feature: Sup/Sub standalone editor
     Then I should see "Superscript and <sub>Subscript</sub>" in the "Both Superscript and Subscript allowed" ousupsub editor
 
     # Apply superscript
-    When I select the range "'',0,'',11" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I select the range "'',0,'',11" in the "Both Superscript and Subscript allowed" ousupsub editor
     And I click on "Superscript" "button"
-    Then I should see "<sup>Superscript</sup> and <sub>Subscript</sub>" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I should see "<sup>Superscript</sup> and <sub>Subscript</sub>" in the "Both Superscript and Subscript allowed" ousupsub editor
 
     # Return superscript to normal
-    When I select the range "'sup',0,'sup',11" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I select the range "'sup',0,'sup',11" in the "Both Superscript and Subscript allowed" ousupsub editor
     And I click on "Superscript" "button"
-    Then I should see "Superscript and <sub>Subscript</sub>" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I should see "Superscript and <sub>Subscript</sub>" in the "Both Superscript and Subscript allowed" ousupsub editor
 
     # Return subscript to normal
-    When I select the range "'sub',0,'sub',9" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I select the range "'sub',0,'sub',9" in the "Both Superscript and Subscript allowed" ousupsub editor
     And I click on "Subscript" "button"
-    Then I should see "Superscript and Subscript" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I should see "Superscript and Subscript" in the "Both Superscript and Subscript allowed" ousupsub editor
 
     # Apply subscript across existing superscript
     And I set the "Both Superscript and Subscript allowed" stand-alone ousupsub editor to "Super<sup>script</sup> and Subscript"
     And I select the range "'sup',3,2,8" in the "Both Superscript and Subscript allowed" ousupsub editor
     And I click on "Subscript" "button"
-    Then I should see "Super<sup>scr</sup><sub>ipt and Sub</sub>script" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I should see "Super<sup>scr</sup><sub>ipt and Sub</sub>script" in the "Both Superscript and Subscript allowed" ousupsub editor
 
     # Apply superscript across existing subscript
     And I select the range "'sup',2,'sub',3" in the "Both Superscript and Subscript allowed" ousupsub editor
     And I click on "Superscript" "button"
-    Then I should see "Super<sup>scr</sup>ipt <sub>and Sub</sub>script" in the "Both Superscript and Subscript allowed" ousupsub editor
+    And I should see "Super<sup>scr</sup>ipt <sub>and Sub</sub>script" in the "Both Superscript and Subscript allowed" ousupsub editor

@@ -265,12 +265,13 @@ class behat_editor_ousupsub extends behat_base {
     /**
      * Enter text in a stand-alone ousupsub field.
      *
-     * @Given /^I enter the text "([^"]*)" in the "([^"]*)" ousupsub editor$/
+     * @Given /^I "([^"]*)" the text "([^"]*)" in the "([^"]*)" ousupsub editor$/
      * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param string $action 'enter', 'insert' or 'append' text.
      * @param string $text
      * @param string $field
      */
-    public function enter_text_in_the_ousupsub_editor($text, $fieldlocator) {
+    public function enter_text_in_the_ousupsub_editor($action, $text, $fieldlocator) {
         // NodeElement.keyPress simply doesn't work.
         if (!$this->running_javascript()) {
             throw new coding_exception('Entering text requires javascript.');
@@ -283,16 +284,20 @@ class behat_editor_ousupsub extends behat_base {
 
         // Trigger the key press through javascript.
         $js = '
-    function EnterTextBehat (id, text) {
+    function EnterTextBehat (action, id, text) {
     // Only works in chrome.
     var target = document.getElementById(id + "editable");
-    // https://stackoverflow.com/questions/39947875/as-of-chrome-53-how-to-add-text-as-if-a-trusted-textinput-event-was-dispatched
-    target.focus();
-    document.execCommand("insertText", false, "' . $text . '");
     // Update the textarea text from the contenteditable div we just changed.
+    if (action == "enter") {
+        target.innerHTML = text;
+    } else if (action == "insert") {
+        target.firstChild.innerHTML = text;
+    } else {
+        target.innerHTML = target.innerHTML + text;
+    }
     UpdateTextArea(id);
 }
-    EnterTextBehat("'.$editorid.'", "'.$text.'");';
+    EnterTextBehat("'.$action.'", "'.$editorid.'", "'.$text.'");';
         $js = $this->get_js_update_textarea() . $js;
         $this->getSession()->executeScript($js);
 

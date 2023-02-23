@@ -7,13 +7,13 @@ Feature: Pasting into the Sup/Sub editor
     Given I log in as "admin"
     And I am on the integrated "both" editor test page
     # Set the initial text
-    And I paste the text "Helicopter" in the "Input" ousupsub editor
+    When I paste the text "Helicopter" in the "Input" ousupsub editor
     Then I should see "Helicopter" in the "Input" ousupsub editor
 
     #Verify paste events can be undone
-    When I press the undo key in the "Input" ousupsub editor
-    Then I should see "" in the "Input" ousupsub editor
+    And I press the undo key in the "Input" ousupsub editor
+    And I should see "" in the "Input" ousupsub editor
 
     # Verify redo key works
-    When I press the redo key in the "Input" ousupsub editor
-    Then I should see "Helicopter" in the "Input" ousupsub editor
+    And I press the redo key in the "Input" ousupsub editor
+    And I should see "Helicopter" in the "Input" ousupsub editor
