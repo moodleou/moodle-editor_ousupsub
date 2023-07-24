@@ -748,11 +748,9 @@ Y.extend(Editor, Y.Base, {
         this.editor.setStyle('minHeight', heightEditor);
         this.editor.setStyle('maxHeight', heightEditor);
         this.editor.setStyle('line-height', heightEditor);
-        // IE needs the editor wrapper height to be set too. It include 4px of padding.
+        // Style the textarea label with the content editor.
         var heightContent = (height + 1) + 'px';
-        content.setStyle('height', heightContent);
-        content.setStyle('minHeight', heightContent);
-        content.setStyle('maxHeight', heightContent);
+        content.setStyle('minHeight', heightEditor);
         // Align the textarea label with the content editor.
         this.textareaLabel.setStyle('display', 'inline-block');
         this.textareaLabel.setStyle('margin', 0);
@@ -765,6 +763,9 @@ Y.extend(Editor, Y.Base, {
             this.textareaLabel.setStyle('visibility', 'hidden');
             this._wrapper.setStyle('margin-left', -parseInt(this.textareaLabel.get('offsetWidth')));
         } else {
+            // Get parent node of the label.
+            var labelParentNode = this.textareaLabel.getDOMNode().parentNode;
+            labelParentNode.style.paddingBottom = heightEditor;
             this.textareaLabel.setStyle('vertical-align', 'bottom');
         }
         // Update the height of the editor and label for correct align after document ready.
