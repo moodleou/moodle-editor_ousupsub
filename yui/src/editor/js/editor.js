@@ -741,14 +741,17 @@ Y.extend(Editor, Y.Base, {
         this.editor.setStyle('maxWidth', width);
         var rows = this.textarea.getAttribute('rows');
         var height = (rows * 6 + 13);
-        var heightEditor = height + 'px';
+        var heightEditor = (height - 10) + 'px';
+        var lineHeightEditor = (height - 6) + 'px';
+        // Style the editor.
         this.editor.setStyle('height', heightEditor);
         this.editor.setStyle('minHeight', heightEditor);
         this.editor.setStyle('maxHeight', heightEditor);
-        this.editor.setStyle('line-height', heightEditor);
+        // Align the content in the editor with the textarea label.
+        this.editor.setStyle('line-height', lineHeightEditor);
         // Style the textarea label with the content editor.
         var heightContent = (height + 1) + 'px';
-        content.setStyle('minHeight', heightEditor);
+        content.setStyle('minHeight', heightContent);
         // Align the textarea label with the content editor.
         this.textareaLabel.setStyle('display', 'inline-block');
         this.textareaLabel.setStyle('margin', 0);
