@@ -1,5 +1,8 @@
 # Change log for the superscript-subscript editor
 
+## Change in 1.3
+* Updated rangy lib to work with Moodle 4.2+.
+
 ## Changes in 1.2
 
 * Updated to work with Moodle 4.0.

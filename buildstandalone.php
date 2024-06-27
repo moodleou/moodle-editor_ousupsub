@@ -49,7 +49,7 @@ class ousupsub_texteditor_standalone_builder {
         'stylecss' => 'styles.css',
         'readme' => 'readme.txt',
         'readmestandalone' => 'standalone-src/readme.txt',
-        'yuiversion' => '3.17.2',
+        'yuiversion' => '3.18.1',
         'wwwroot' => '../../..'
     );
     private static $yuisuffix = '-min';
