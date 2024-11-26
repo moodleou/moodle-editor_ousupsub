@@ -82,27 +82,9 @@ class ousupsub_texteditor extends texteditor {
             $options['supsub'] = 'both';
         }
 
-        switch ($options['supsub']) {
-            case 'both':
-                $groups = ['style1' => ['superscript', 'subscript']];
-                break;
-
-            case 'sup':
-                $groups = ['style1' => ['superscript']];
-                break;
-
-            case 'sub':
-                $groups = ['style1' => ['subscript']];
-                break;
-
-            default:
-                throw new coding_exception("Invalid value '" .$options['supsub'] .
-                        "' for option 'supsub'. Must be one of 'both', 'sup' or 'sub'.");
-        }
-
-        $groupplugins = [];
-        foreach ($groups['style1'] as $plugin) {
-            $groupplugins[] = ['name' => $plugin, 'params' => []];
+        if (!in_array($options['supsub'], ['sup', 'sub', 'both'])) {
+            throw new coding_exception("Invalid value '" .$options['supsub'] .
+                "' for option 'supsub'. Must be one of 'both', 'sup' or 'sub'.");
         }
 
         $PAGE->requires->js_call_amd('editor_ousupsub/editor', 'loadEditor', [

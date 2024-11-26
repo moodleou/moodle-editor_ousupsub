@@ -100,15 +100,15 @@ class OUSupSubEditor {
 
         // Make toolbar containers.
         const toolbarEl = this.initEditorToolbar();
-        this.appendChild(editorWrap, toolbarEl);
+        editorWrap.appendChild(toolbarEl);
 
         // Make the content for editor.
         const contentElementWrap = this.initEditorContent();
         const contentEditor = contentElementWrap.querySelector(`.${this.settings.classes.content}`);
 
         // Append the editor's elements to the DOM.
-        this.appendChild(editorWrap, contentElementWrap);
-        this.appendChild(editorElement, editorWrap);
+        editorWrap.appendChild(contentElementWrap);
+        editorElement.appendChild(editorWrap);
 
         // Calculate the editor size based on the attributes 'cols' and 'rows'.
         const width = (this.getTextArea().getAttribute('cols') * 6 + 41) + 'px';
@@ -265,7 +265,7 @@ class OUSupSubEditor {
             'class': (classes.contentWrap + ' ' + (custom.contentWrap ?? '')).trim(),
         });
 
-        this.appendChild(wrapContent, contentElement);
+        wrapContent.appendChild(contentElement);
 
         return wrapContent;
     };
@@ -333,7 +333,7 @@ class OUSupSubEditor {
         if (nodeEl) {
             const nodeName = nodeEl.nodeName.toLowerCase();
             if (nodeName !== action) {
-                this.setFormat(this.getActions(nodeName === 'sup' ? 'sub' : 'sup')[0]);
+                this.setFormat(this.getActions(nodeName)[0]);
             }
             return;
         }
@@ -451,16 +451,6 @@ class OUSupSubEditor {
     }
 
     /**
-     * Utility function to append a child node to a parent node.
-     *
-     * @param {HTMLElement} parent - The parent node that will contain the child node.
-     * @param {HTMLElement} child - The child node.
-     */
-    appendChild(parent, child) {
-        parent.appendChild(child);
-    }
-
-    /**
      * Utility function to create a toolbar element that contains sup and sub buttons.
      *
      * @return {HTMLElement} The toolbar element.
@@ -494,12 +484,12 @@ class OUSupSubEditor {
                 this.setFormat(action);
             };
 
-            this.appendChild(toolbarGroup, button);
+            toolbarGroup.appendChild(button);
         });
         const toolbarEl = this.createElement('div', {
             'class': (this.settings.classes.toolbar + ' ' + (this.settings?.custom?.toolbar ?? '')).trim(),
         });
-        this.appendChild(toolbarEl, toolbarGroup);
+        toolbarEl.appendChild(toolbarGroup);
 
         return toolbarEl;
     }
