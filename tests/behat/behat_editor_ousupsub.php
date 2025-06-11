@@ -73,7 +73,36 @@ class behat_editor_ousupsub extends behat_base {
         if (!method_exists($field, 'select_text')) {
             throw new coding_exception('Field does not support the select_text function.');
         }
-        $field->select_text();
+        $editorid = $field->get_attribute('id');
+        // Inject and run JavaScript to select the text content.
+        $js = ' (function() {
+        var e = document.getElementById("' . $editorid . 'editable");
+
+        if (!e) {
+            console.error("Editable element not found with ID: ' . $editorid . 'editable");
+            return;
+        }
+
+        var node = e;
+        while (node.firstChild && node.firstChild.nodeType !== Node.TEXT_NODE) {
+            node = node.firstChild;
+        }
+
+        var range = document.createRange();
+        var selection = window.getSelection();
+
+        if (node && node.nodeType === Node.TEXT_NODE) {
+            range.selectNodeContents(node);
+        } else {
+            range.selectNodeContents(e);
+        }
+
+        selection.removeAllRanges();
+        selection.addRange(range);
+        e.focus();
+        }()); ';
+
+        behat_base::execute_script_in_session($field->getSession(), $js);
     }
 
     /**
