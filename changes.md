@@ -1,7 +1,9 @@
 # Change log for the superscript-subscript editor
 
 ## Change in 1.3
-* Updated rangy lib to work with Moodle 4.2+.
+
+- Update behat to work with Moodle 5.0+.
+
 
 ## Changes in 1.2
 

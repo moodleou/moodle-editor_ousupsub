@@ -63,7 +63,9 @@ echo  ' ', html_writer::tag('input', '', $submitoptions);
 echo html_writer::tag('h2', 'ATTO Editor');
 echo html_writer::label('ATTO Input', 'attoeditor');
 echo html_writer::tag('textarea', '', ['name' => 'attoeditor', 'id' => 'attoeditor', 'rows' => 2, 'cols' => 20]);
-$attoeditor->use_editor('attoeditor', ['supsub' => $type]);
+if ($attoeditor) {
+    $attoeditor->use_editor('attoeditor', ['supsub' => $type]);
+}
 $submitoptions['id'] = 'submitattoeditor';
 echo html_writer::tag('input', '', $submitoptions);
 echo $OUTPUT->footer();
